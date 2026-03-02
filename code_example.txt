@@ -1,7 +1,7 @@
 # Source is a single file. No imports, etc. 
 # Comments look like this. No block comments. 
 # The language is strongly and statically typed. 
-# Base types are:  
+# Base types are:
 #    INT (signed 32-bit), 
 #    FLOAT (32-bit),  
 #    BOOL (true/false),  
