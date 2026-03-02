@@ -11,6 +11,7 @@ public class TestLexer {
         String input = "var x int = 2;";
         StringReader reader = new StringReader(input);
         Lexer lexer = new Lexer(reader);
+        lexer.show_token();
         assertNotNull(lexer.getNextSymbol());
     }
 

@@ -3,8 +3,25 @@
  */
 package compiler;
 
+import compiler.Lexer.Lexer;
+
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Compiler {
     public static void main(String[] args) {
         System.out.println("Hello from the compiler !");
+        System.out.println("Phase 1 : Lexing");
+        System.out.println("Token trouvés : ");
+        String fichier = args[1];
+
+        try (FileReader reader = new FileReader(fichier)) {
+            Lexer lexer = new Lexer(reader);
+            lexer.show_token();
+
+        } catch (IOException e) {
+            System.err.println("Erreur ouverture fichier" + e.getMessage());
+            System.exit(1);
+        }
     }
 }
