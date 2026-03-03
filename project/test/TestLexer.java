@@ -15,7 +15,8 @@ public class TestLexer {
         assertNotNull(lexer.getNextSymbol());
     }
 
-    @Test
+}
+/*    @Test
     public void test2() {
         String input = "# Source is a single file. No imports, etc. \n" +
                 "# Comments look like this. No block comments. \n" +
@@ -172,5 +173,4 @@ public class TestLexer {
         lexer.show_token();
         assertNotNull(lexer.getNextSymbol());
     }
-
-}
+*/

@@ -33,3 +33,16 @@ application {
     // Define the main class for the application.
     mainClass.set("compiler.Compiler")
 }
+// source noa sur le discord SINF
+// "Si ça peut aider (à rajouter à la fin du build.gradle.kts, puis vous pouvez run gradle packageSource (ou ./gradlew packageSource, peu importe) pour zip le tout)
+// Ca output le zip dans build/distributions (après vous pouvez modifier comme vous voulez)"
+tasks.register<Zip>("packageSource") {
+    dependsOn("test")
+    archiveBaseName.set("${project.name}-source")
+    destinationDirectory.set(file("${layout.buildDirectory.get()}/distributions"))
+
+    from(projectDir) {
+        into(projectDir.name)
+        exclude(".gradle/**", ".vscode/**", ".idea/**", "build/**", ".github/**", ".git/**")
+    }
+}
