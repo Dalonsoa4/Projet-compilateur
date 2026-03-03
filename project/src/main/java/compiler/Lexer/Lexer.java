@@ -89,6 +89,7 @@ public class Lexer {
     public Symbol lexing_identifiant_et_motclef() {
         int colonne_depart = colonne;
         StringBuilder identifiant = new StringBuilder();
+        char premiere_lettre = (char) char_actuel;
 
         while (Character.isLetterOrDigit(char_actuel) || char_actuel == '_') {
             identifiant.append((char) char_actuel);
@@ -97,24 +98,28 @@ public class Lexer {
 
         String valeur = identifiant.toString();
         switch (valeur) { // liste des mots clefs
-            case "int":
-            case "float":
-            case "bool":
-            case "string":
-            case "true":
-            case "false":
+            case "INT":
+            case "FLOAT":
+            case "BOOL":
+            case "STRING":
             case "if":
             case "else":
             case "while":
+            case "not":
             case "for":
-            case "fun":
+            case "def":
             case "return":
             case "final":
-            case "rec":
-            case "array":
-            case "free":
+            case "coll":
+            case "ARRAY":
                 return new Symbol(Symbol.Type_Symbol.MOT_CLEF, valeur, ligne, colonne_depart);
+            case "true":
+            case "false":
+                return new Symbol(Symbol.Type_Symbol.BOOL_LITERAL, valeur, ligne, colonne_depart);
             default:
+                if(Character.isUpperCase(premiere_lettre)){
+                    return new Symbol(Symbol.Type_Symbol.COLLECTION, valeur, ligne, colonne_depart);
+                }
                 return new Symbol(Symbol.Type_Symbol.IDENTIFIANT, valeur, ligne, colonne_depart);
         }
     }
@@ -126,9 +131,16 @@ public class Lexer {
 
         while (char_actuel != '"' && char_actuel != -1) { // jusqu'a la fin du fichier ou guillemets fermant
             if (char_actuel == '\\') {
-                char_suivant();
-                if (char_actuel == '"' || char_actuel == '\\') { // pour ce genre de cas \"Hello\"
-                    string.append((char) char_actuel);
+                /* La solution ici pour bien gerer les \n dans les strings a été suggerée par ChatGPT
+                 L'output de mes tests n'était pas très clair pour bien visualiser ce qu'il se passait
+                 avec les sauts de lignes  */
+                char_suivant(); // on lit le char échappé
+                if (char_actuel == 'n') {
+                    string.append('\n');          // <-- gère \n
+                } else if (char_actuel == '"' ) {
+                    string.append('"');           // <-- gère \"
+                } else if (char_actuel == '\\') {
+                    string.append('\\');          // <-- gère \\
                 } else {
                     throw new RuntimeException("Suite de char invalide");
                 }
@@ -162,7 +174,7 @@ public class Lexer {
                 continue;
             }
 
-            if (char_actuel == '$') { // quand c'est un commentaires on skip la ligne
+            if (char_actuel == '#') { // quand c'est un commentaires on skip la ligne
                 while (char_actuel != '\n' && char_actuel != -1) {
                     char_suivant();
                 }
@@ -173,7 +185,7 @@ public class Lexer {
                 return lexing_nombre();
             }
 
-            if (Character.isLetter(char_actuel)) { // si c'est une lettre sans rien alors c'est un mot clef ou un id
+            if (Character.isLetter(char_actuel) || char_actuel == '_') { // si c'est une lettre sans rien alors c'est un mot clef ou un id
                 return lexing_identifiant_et_motclef();
             }
 
@@ -188,6 +200,10 @@ public class Lexer {
                     return new Symbol(Symbol.Type_Symbol.PLUS, "+", ligne, colonne_depart);
                 case '-':
                     char_suivant();
+                    if(char_actuel == '>'){
+                        char_suivant();
+                        return new Symbol(Symbol.Type_Symbol.RANGE, "->", ligne, colonne_depart);
+                    }
                     return new Symbol(Symbol.Type_Symbol.MOINS, "-", ligne, colonne_depart);
                 case '*':
                     char_suivant();
@@ -233,16 +249,17 @@ public class Lexer {
                     char_suivant();
                     if (char_actuel == '=') {
                         char_suivant();
-                        return new Symbol(Symbol.Type_Symbol.EGAL, "==", ligne, colonne_depart);
+                        return new Symbol(Symbol.Type_Symbol.EGAL_COMPARAISON, "==", ligne, colonne_depart);
                     }
-                    return new Symbol(Symbol.Type_Symbol.EGAL, "=", ligne, colonne_depart);
-                case '!':
-                    char_suivant();
-                    if (char_actuel == '=') {
+                    if(char_actuel == '/'){
                         char_suivant();
-                        return new Symbol(Symbol.Type_Symbol.NOT_EGAL, "!=", ligne, colonne_depart);
+                        if (char_actuel == '=') {
+                            char_suivant();
+                            return new Symbol(Symbol.Type_Symbol.NOT_EGAL, "=/=", ligne, colonne_depart);
+                        }
+                        throw new RuntimeException("=/ n'existe pas " + (char) char_actuel);
                     }
-                    return new Symbol(Symbol.Type_Symbol.NOT, "!", ligne, colonne_depart);
+                    return new Symbol(Symbol.Type_Symbol.EGAL_ASSIGNATION, "=", ligne, colonne_depart);
                 case '<':
                     char_suivant();
                     if (char_actuel == '=') {
