@@ -27,6 +27,10 @@ public class Lexer {
         }
     }
 
+    public ArrayList<Symbol> getListe_token() {
+        return liste_token;
+    }
+
     public void char_suivant() {
         try {
             char_actuel = input.read();
