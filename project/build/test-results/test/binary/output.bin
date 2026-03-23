@@ -5,3 +5,13 @@
 TOKEN<INT,1,0,9,>
 TOKEN<PLUS,+,0,11,>
 TOKEN<INT,2,0,13,>
+TOKEN<PLUS,+,0,14,>
+TOKEN<INT,3,0,15,>
+VarDeclStmt
+  Type(INT)
+  Identifier(x)
+  BinaryExpr(+)
+    BinaryExpr(+)
+      IntLiteral(1)
+      IntLiteral(2)
+    IntLiteral(3)

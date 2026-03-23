@@ -9,3 +9,35 @@ package compiler.Parser;
 
 
 abstract class Expression extends ASTNode {}
+
+class IntLiteral extends Expression {
+    public final int value;
+
+    public IntLiteral(int value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toTree(String indent) {
+        return indent + "IntLiteral(" + value + ")";
+    }
+}
+
+class BinaryExpr extends Expression {
+    public final String operator;
+    public final Expression left;
+    public final Expression right;
+
+    public BinaryExpr(String operator, Expression left, Expression right) {
+        this.operator = operator;
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public String toTree(String indent) {
+        return indent + "BinaryExpr(" + operator + ")\n"
+                + left.toTree(indent + "  ") + "\n"
+                + right.toTree(indent + "  ");
+    }
+}

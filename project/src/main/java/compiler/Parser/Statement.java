@@ -7,4 +7,24 @@ package compiler.Parser;
 * les condifitions, if , ect sont des Statement
 */
 
-abstract class Statement extends ASTNode {}
+public abstract class Statement extends ASTNode {}
+
+class VarDeclStmt extends Statement {
+    public final TypeNode type;
+    public final String name;
+    public final Expression initializer;
+
+    public VarDeclStmt(TypeNode type, String name, Expression initializer) {
+        this.type = type;
+        this.name = name;
+        this.initializer = initializer;
+    }
+
+    @Override
+    public String toTree(String indent) {
+        return indent + "VarDeclStmt\n"
+                + indent + "  " + type.toTree("") + "\n"
+                + indent + "  Identifier(" + name + ")\n"
+                + initializer.toTree(indent + "  ");
+    }
+}
