@@ -18,7 +18,7 @@ public class Lexer {
         liste_token = new ArrayList<>();
         char_suivant();
         stock_token();
-        show_token();
+        //show_token();
     }
 
     public void show_token() {

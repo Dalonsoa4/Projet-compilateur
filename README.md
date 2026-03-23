@@ -35,6 +35,3 @@ Expliquations :
 - Si certaines parties de la grammaire n'est pas LL(1), on peut écrire des fonctions speciales pour la parser
 - une grammaire est LL(1) si elle n'a besoin que de un token pour pouvoir choisir la bonne règle
 
-L'énoncé du projet mentionne que note
-
-

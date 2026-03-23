@@ -1,13 +1,7 @@
+Token à Parser : 
 TOKEN<MOT_CLEF,INT,0,1,>
 TOKEN<IDENTIFIANT,x,0,5,>
  TOKEN<EGAL_ASSIGNATION,=,0,7,>
 TOKEN<INT,1,0,9,>
 TOKEN<PLUS,+,0,11,>
 TOKEN<INT,2,0,13,>
-TOKEN<MOT_CLEF,INT,0,1,>
-TOKEN<IDENTIFIANT,x,0,5,>
- TOKEN<EGAL_ASSIGNATION,=,0,7,>
-TOKEN<INT,1,0,9,>
-TOKEN<PLUS,+,0,11,>
-TOKEN<INT,2,0,13,>
-Hello from the Parser
