@@ -25,6 +25,7 @@ class VarDeclStmt extends Statement {
         return indent + "VarDeclStmt\n"
                 + indent + "  " + type.toTree("") + "\n"
                 + indent + "  Identifier(" + name + ")\n"
+                + indent + "  AssignmentOperator(=)\n"
                 + initializer.toTree(indent + "  ");
     }
 }

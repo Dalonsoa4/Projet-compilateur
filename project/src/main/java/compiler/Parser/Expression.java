@@ -36,8 +36,9 @@ class BinaryExpr extends Expression {
 
     @Override
     public String toTree(String indent) {
-        return indent + "BinaryExpr(" + operator + ")\n"
+        return indent + "ExprBinaire"+"\n"
                 + left.toTree(indent + "  ") + "\n"
+                + indent + "  " + "OperatorCalcul " + operator + "\n"
                 + right.toTree(indent + "  ");
     }
 }

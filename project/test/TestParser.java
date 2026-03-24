@@ -11,7 +11,7 @@ public class TestParser {
 
     @Test
     public void test() {
-        String input = "INT x = 1 + 2+3";
+        String input = "INT x = (1 + 2) * 3";
         StringReader reader = new StringReader(input);
         Parser parser = new Parser(reader);
         Statement ast = parser.getAST();

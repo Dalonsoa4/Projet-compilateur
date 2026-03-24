@@ -42,6 +42,51 @@ public class Symbol {
         return colonne;
     }
 
+    public Boolean is_symbol_for_calcul_low_priority() {
+        switch (type){
+            case PLUS:
+            case MOINS:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public Boolean is_symbol_for_calcul_high_priority() {
+        switch (type){
+            case MULTIPLICATION:
+            case DIVISION:
+            case MODULO:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public Boolean is_symbol_for_operation(){
+        switch (type){
+            case OR:
+            case AND:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public Boolean is_symbol_for_comparaison(){
+        switch (type){
+            case EGAL_COMPARAISON:
+            case NOT_EGAL:
+            case EGAL_OU_PLUS:
+            case EGAL_OU_MOINS:
+            case INFERIEUR:
+            case SUPERIEUR:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "TOKEN<" + type + ',' + valeur + ',' + ligne + ',' + colonne + ',' + '>';

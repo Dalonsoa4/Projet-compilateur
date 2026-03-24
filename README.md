@@ -35,3 +35,7 @@ Expliquations :
 - Si certaines parties de la grammaire n'est pas LL(1), on peut écrire des fonctions speciales pour la parser
 - une grammaire est LL(1) si elle n'a besoin que de un token pour pouvoir choisir la bonne règle
 
+Il faudra expliquer dans le rapport : 
+
+- l'ordre des appels du parser
+- comment j'ai geré l'associativité des operateurs (exemple le * qui l'emporte sur le + comme on a vu dans les slides)

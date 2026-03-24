@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestParser" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-03-23T22:08:07" hostname="DESKTOP-SE4L5N1" time="0.023">
+<testsuite name="TestParser" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-03-24T13:10:08" hostname="DESKTOP-SE4L5N1" time="0.02">
   <properties/>
-  <testcase name="test" classname="TestParser" time="0.023"/>
+  <testcase name="test" classname="TestParser" time="0.02"/>
   <system-out><![CDATA[Token à Parser : 
 TOKEN<MOT_CLEF,INT,0,1,>
 TOKEN<IDENTIFIANT,x,0,5,>
 TOKEN<EGAL_ASSIGNATION,=,0,7,>
-TOKEN<INT,1,0,9,>
-TOKEN<PLUS,+,0,11,>
-TOKEN<INT,2,0,13,>
-TOKEN<PLUS,+,0,14,>
-TOKEN<INT,3,0,15,>
+TOKEN<PARENTHESE_GAUCHE,(,0,9,>
+TOKEN<INT,1,0,10,>
+TOKEN<PLUS,+,0,12,>
+TOKEN<INT,2,0,14,>
+TOKEN<PARENTHESE_DROITE,),0,15,>
+TOKEN<MULTIPLICATION,*,0,17,>
+TOKEN<INT,3,0,19,>
 VarDeclStmt
   Type(INT)
   Identifier(x)
-  BinaryExpr(+)
-    BinaryExpr(+)
+  AssignmentOperator(=)
+  ExprBinaire
+    ExprBinaire
       IntLiteral(1)
+      OperatorCalcul +
       IntLiteral(2)
+    OperatorCalcul *
     IntLiteral(3)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
