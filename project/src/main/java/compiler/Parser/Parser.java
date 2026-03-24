@@ -105,6 +105,12 @@ public class Parser {
             return new IntLiteral(value);
         }
 
+        if (current.getType() == Symbol.Type_Symbol.FLOAT) {
+            double value = Double.parseDouble(current.getValeur()); // pour choper la valeur du symbole, toString() fonctionne pas
+            advance();
+            return new FloatLiteral(value);
+        }
+
         // gere la priorité des opérations quand y'a des parentheses
         if (current.getType() == Symbol.Type_Symbol.PARENTHESE_GAUCHE) {
             advance();

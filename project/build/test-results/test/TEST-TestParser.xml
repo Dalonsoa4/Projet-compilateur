@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestParser" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-03-24T13:10:08" hostname="DESKTOP-SE4L5N1" time="0.02">
+<testsuite name="TestParser" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-03-24T13:21:03" hostname="DESKTOP-SE4L5N1" time="0.025">
   <properties/>
-  <testcase name="test" classname="TestParser" time="0.02"/>
+  <testcase name="test" classname="TestParser" time="0.025"/>
   <system-out><![CDATA[Token à Parser : 
-TOKEN<MOT_CLEF,INT,0,1,>
-TOKEN<IDENTIFIANT,x,0,5,>
-TOKEN<EGAL_ASSIGNATION,=,0,7,>
-TOKEN<PARENTHESE_GAUCHE,(,0,9,>
-TOKEN<INT,1,0,10,>
-TOKEN<PLUS,+,0,12,>
-TOKEN<INT,2,0,14,>
-TOKEN<PARENTHESE_DROITE,),0,15,>
-TOKEN<MULTIPLICATION,*,0,17,>
-TOKEN<INT,3,0,19,>
+TOKEN<MOT_CLEF,FLOAT,0,1,>
+TOKEN<IDENTIFIANT,x,0,7,>
+TOKEN<EGAL_ASSIGNATION,=,0,9,>
+TOKEN<PARENTHESE_GAUCHE,(,0,11,>
+TOKEN<FLOAT,1.5,0,12,>
+TOKEN<PLUS,+,0,16,>
+TOKEN<FLOAT,2.4,0,18,>
+TOKEN<PARENTHESE_DROITE,),0,21,>
+TOKEN<MULTIPLICATION,*,0,23,>
+TOKEN<INT,3,0,25,>
 VarDeclStmt
-  Type(INT)
+  Type(FLOAT)
   Identifier(x)
   AssignmentOperator(=)
   ExprBinaire
     ExprBinaire
-      IntLiteral(1)
-      OperatorCalcul +
-      IntLiteral(2)
-    OperatorCalcul *
+      Float(1.5)
+      OperatorCalcul(+)
+      Float(2.4)
+    OperatorCalcul(*)
     IntLiteral(3)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -23,6 +23,19 @@ class IntLiteral extends Expression {
     }
 }
 
+class FloatLiteral extends Expression {
+    public final double value;
+
+    public FloatLiteral(double value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toTree(String indent) {
+        return indent + "Float(" + value + ")";
+    }
+}
+
 class BinaryExpr extends Expression {
     public final String operator;
     public final Expression left;
@@ -38,7 +51,7 @@ class BinaryExpr extends Expression {
     public String toTree(String indent) {
         return indent + "ExprBinaire"+"\n"
                 + left.toTree(indent + "  ") + "\n"
-                + indent + "  " + "OperatorCalcul " + operator + "\n"
+                + indent + "  " + "OperatorCalcul"+"(" + operator +")"+ "\n"
                 + right.toTree(indent + "  ");
     }
 }
