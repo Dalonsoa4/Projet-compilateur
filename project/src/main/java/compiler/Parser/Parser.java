@@ -4,24 +4,33 @@ import compiler.Lexer.Symbol;
 import compiler.Lexer.Lexer;
 
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Parser {
 
     private ArrayList<Symbol> liste_token;
     private int index_token;
+    private ArrayList<Statement> liste_statements;
 
     public Parser(Reader input) {
         Lexer lexer = new Lexer(input);
         liste_token = lexer.getListe_token();
         index_token = 0;
+        liste_statements = new ArrayList<Statement>();
 
         System.out.println("Token à Parser : ");
         lexer.show_token();
     }
 
-    public Statement getAST() {
-        return parseVarDecl(); // doit devenir parseprogram()
+    public ArrayList<Statement> getAST() {
+        liste_statements.add(parseVarDecl());
+        System.out.println(currentToken());
+        if(currentToken().is_symbole_point_virgule()){
+            advance();
+            liste_statements.add(parseVarDecl());
+        }
+        return liste_statements;// doit devenir parseprogram()
     }
 
 

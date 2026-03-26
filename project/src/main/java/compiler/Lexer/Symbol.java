@@ -87,6 +87,15 @@ public class Symbol {
         }
     }
 
+    public boolean is_symbole_point_virgule(){
+        switch (type){
+            case POINT_VIRGULE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "TOKEN<" + type + ',' + valeur + ',' + ligne + ',' + colonne + ',' + '>';
