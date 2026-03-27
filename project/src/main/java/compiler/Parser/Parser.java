@@ -25,7 +25,6 @@ public class Parser {
 
     public ArrayList<Statement> getAST() {
         liste_statements.add(parseVarDecl());
-        System.out.println(currentToken());
         if(currentToken().is_symbole_point_virgule()){
             advance();
             liste_statements.add(parseVarDecl());
@@ -83,6 +82,15 @@ public class Parser {
 
     private Statement parseVarDecl() {
         // faut gerer le cas où y'a plusieurs initialiseur à la suite
+
+        Symbol current = currentToken();
+        boolean is_final = false;
+
+        if (current.getValeur().equals("final")){
+            is_final = true;
+            advance();
+        }
+
         TypeNode type = parseType();
 
         String name = match(Symbol.Type_Symbol.IDENTIFIANT).getValeur();
@@ -91,7 +99,7 @@ public class Parser {
 
         Expression initializer = parseExpression();
 
-        return new VarDeclStmt(type, name, initializer);
+        return new VarDeclStmt(is_final, type, name, initializer);
     }
 
     private TypeNode parseType() {

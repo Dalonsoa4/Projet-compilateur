@@ -13,8 +13,10 @@ class VarDeclStmt extends Statement {
     public final TypeNode type;
     public final String name;
     public final Expression initializer;
+    public final boolean is_declaration_final;
 
-    public VarDeclStmt(TypeNode type, String name, Expression initializer) {
+    public VarDeclStmt(Boolean is_final, TypeNode type, String name, Expression initializer) {
+        this.is_declaration_final = is_final;
         this.type = type;
         this.name = name;
         this.initializer = initializer;
@@ -22,7 +24,7 @@ class VarDeclStmt extends Statement {
 
     @Override
     public String toTree(String indent) {
-        return indent + "VarDeclStmt\n"
+        return indent + "VarDeclStmt" + (is_declaration_final ? "(final)" : "") + "\n"
                 + indent + "  " + type.toTree("") + "\n"
                 + indent + "  Identifier(" + name + ")\n"
                 + indent + "  AssignmentOperator(=)\n"
